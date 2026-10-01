@@ -1440,7 +1440,7 @@ function card(b){
       <div>
         <h3>${esc(b.name)}${b.rankEstimated ? `<span class="est" title="연수 표기가 없어 제품 등급으로 추정한 순위">등급 추정</span>` : ""}</h3>
         <dl>
-          <dt>${b.category==="와인"?"생산연도":b.category==="꼬냑"?"원액 등급":"숙성연도"}</dt><dd>${esc(b.age)}${b.ageEstimated ? `<span class="est">추정</span>` : ""}</dd>
+          <dt>${b.category==="와인"?"생산연도":b.category==="꼬냑"?"원액 등급":"숙성연수"}</dt><dd>${esc(b.age)}${b.ageEstimated ? `<span class="est">추정</span>` : ""}</dd>
           <dt>유통연대</dt><dd>${esc(b.era)}${b.eraEstimated ? `<span class="est" title="${esc(b.eraBasis||"")}">추정</span>` : ""}</dd>
         </dl>
         <p class="note">${esc(b.notes)}</p>
