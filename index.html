@@ -54,6 +54,37 @@ dt{color:var(--muted)} dd{margin:0}
 .brand:not([open])>summary::before{content:"▸"}
 .brand>summary small{margin-left:auto;font:500 13px "Noto Sans KR",sans-serif;color:var(--muted)}
 .brand>summary:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+
+#chat-fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:20;display:flex;align-items:center;gap:6px;padding:12px 16px;border-radius:999px;border:0;background:var(--brass);color:var(--bg);font:500 15px "Noto Sans KR",sans-serif;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+#chat{position:fixed;z-index:30;right:16px;bottom:16px;width:380px;max-width:calc(100vw - 32px);height:min(600px,calc(100vh - 32px));display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.2);overflow:hidden}
+#chat[hidden]{display:none}
+#chat header{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line)}
+#chat header b{font:700 16px "Noto Serif KR",serif}
+#chat-mode{font-size:12px;color:var(--brass);margin-right:auto}
+#chat header button,#chat-settings button,#chat-chips button{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:6px;padding:4px 10px;font:13px "Noto Sans KR",sans-serif;cursor:pointer}
+#chat-settings{padding:10px 12px;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+#chat-settings p{margin:0 0 8px}
+#chat-settings input{width:100%;padding:8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:14px monospace}
+#chat-settings .row{display:flex;gap:8px;margin-top:8px}
+#chat-log{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:92%;padding:8px 12px;border-radius:10px;font-size:14px;line-height:1.55}
+.msg.me{align-self:flex-end;background:var(--brass);color:var(--bg)}
+.msg.bot{align-self:flex-start;background:var(--bg);border:1px solid var(--line)}
+.hits{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.hits button{display:flex;gap:8px;align-items:center;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:4px;color:var(--ink);cursor:pointer;font:inherit}
+.hits img{width:36px;height:48px;object-fit:cover;border-radius:3px;flex:none}
+.hits b{display:block;font-weight:500;font-size:13.5px;line-height:1.35}
+.hits small{color:var(--muted);font-size:12px}
+.more{margin:6px 0 0;font-size:12px;color:var(--muted)}
+#chat-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 12px 8px}
+#chat-chips[hidden]{display:none}
+#chat-form{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--line)}
+#chat-in{flex:1;min-width:0;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:16px "Noto Sans KR",sans-serif}
+#chat-form button{border:0;border-radius:8px;background:var(--brass);color:var(--bg);width:44px;font-size:18px;cursor:pointer}
+.bottle.flash{animation:flash 1.6s ease}
+@keyframes flash{0%,40%{border-color:var(--brass);box-shadow:0 0 0 3px var(--brass)}100%{box-shadow:none}}
+@media (max-width:700px){#chat{right:0;left:0;bottom:0;width:auto;max-width:none;height:80vh;border-radius:12px 12px 0 0;padding-bottom:env(safe-area-inset-bottom,0px)}}
+main{padding-bottom:96px}
 </style>
 </head>
 <body>
@@ -1003,7 +1034,7 @@ const BOTTLES = [
   "era": "2020년대",
   "eraEstimated": true,
   "eraBasis": "46.3% vol·튜브 패키지 현행 디자인 기준",
-  "notes": "피트를 거의 쓰지 않는 아일라 몰트. 셰리·버번 캐스크 12년, 46.3%, 논칠필터·무착색.",
+  "notes": "아일라에서 드물게 훈연 향이 거의 없는 몰트. 셰리·버번 캐스크 12년, 46.3%, 논칠필터·무착색.",
   "image": "data:image/jpeg;base64,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",
   "brand": "Bunnahabhain",
   "rank": 12,
@@ -1642,7 +1673,7 @@ function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;","
 
 function card(b){
   return `
-    <article class="bottle">
+    <article class="bottle" id="b${BOTTLES.indexOf(b)}">
       ${b.image ? `<img src="${b.image}" alt="${esc(b.name)}">` : "<div></div>"}
       <div>
         <h3>${esc(b.name)}${b.rankEstimated ? `<span class="est" title="연수 표기가 없어 제품 등급으로 추정한 순위">등급 추정</span>` : ""}</h3>
@@ -1675,6 +1706,161 @@ app.innerHTML = CATEGORIES.map(cat => {
   }).join("") || `<p class="empty">아직 등록된 병이 없습니다.</p>`;
   return `<details class="cat" open><summary>${cat}<small>${list.length}병</small></summary>${body}</details>`;
 }).join("");
+
+// ───────── 술장 검색 (대화창) ─────────
+// 한·영 동의어 묶음. 새 브랜드/표현을 추가하려면 한 줄 넣으세요.
+const SYNONYMS = [
+ ["헤네시","hennessy"],["마르텔","마텔","martell"],["레미마르탱","레미 마르탱","레미마틴","레미 마틴","remy martin","remy"],
+ ["카뮈","까뮈","까뮤","camus"],["쿠르부아지에","꾸르보아제","쿠르보아지에","courvoisier"],["프라팽","frapin"],["오타르","otard"],
+ ["발렌타인","밸런타인","ballantine"],["벨즈","벨스","bell's","bells"],["던힐","dunhill"],["조니워커","조니 워커","johnnie walker","john walker","johnnie"],
+ ["닛카","nikka"],["로얄살루트","로열살루트","로얄 살루트","로열 살루트","royal salute"],["산시바","잔지바","sansibar"],
+ ["화이트앤맥케이","화이트 앤 맥케이","whyte & mackay","whyte"],["발베니","balvenie"],["부나하벤","bunnahabhain"],["클라이넬리시","clynelish"],
+ ["달모어","dalmore"],["에드라두어","edradour"],["글렌알라키","glenallachie"],["글렌드로낙","글렌드로나크","glendronach"],
+ ["글렌피딕","glenfiddich"],["글렌고인","glengoyne"],["글렌리벳","glenlivet"],["글렌모렌지","glenmorangie"],["글렌터렛","glenturret"],
+ ["맥캘란","맥켈란","맥칼란","macallan"],["마르스","쓰누키","츠누키","mars","tsunuki"],["시그너토리","signatory"],["스프링뱅크","springbank"],
+ ["케이머스","caymus"],["트라피체","trapiche"],["이스카이","iscay"],["탈보","탈보트","talbot"],["기원","ki one","kione"],["화요","hwayo"],
+ ["타케츠루","다케츠루","taketsuru"],["킹스랜드","kingsland"],["슈퍼닛카","슈퍼 닛카","super nikka"],
+ ["블루","blue"],["골드","gold"],["블랙","black"],["레드","red"],["그린","green"],["스윙","swing"],["엑셀시오르","엑셀시어","excelsior"],
+ ["킹조지","킹 조지","king george"],["파라디","paradis"],["코르동블루","꼬르동블루","코르동 블루","꼬르동 블루","cordon bleu"],
+ ["나폴레옹","napoleon"],["엑스트라","extra"],["xo","x.o","엑스오"],["xxo"],["vsop"],["오스쿠로","oscuro"],["클래식컷","클래식 컷","classic cut"],
+ ["셰리","쉐리","sherry"],["올로로소","oloroso"],["px","페드로 히메네스","페드로히메네스","pedro"],["포트","port"],["버번","bourbon"],
+ ["피트","피티드","스모키","peat","smok"],["미즈나라","mizunara"],["마데이라","madeira"],["캐스크스트렝스","캐스크 스트렝스","cask strength"],
+ ["싱글캐스크","싱글 캐스크","single cask"],["와인 캐스크","와인캐스크","wine cask"],["빈티지","vintage"],["한정","리미티드","limited"],["면세","duty free"],["대만","taiwan"],
+ ["일본","japan","재패니즈","japanese"],["한국","korea","코리안","korean"],["스코틀랜드","scotland","스카치"],["미국","usa","america","나파"],["프랑스","france","그랑드 샹파뉴","champagne"],["아르헨티나","argentina","멘도사","mendoza"],["보르도","bordeaux","생쥘리앙"],
+ ["데캔터","디캔터","decanter"],["기념","anniversary","주년"],
+ ["꼬냑","코냑","브랜디","cognac","brandy"],["위스키","whisky","whiskey","스카치","scotch"],["싱글몰트","싱글 몰트","single malt"],
+ ["블렌디드","블랜디드","blended","blend"],["와인","wine"],["소주","증류주","spirit"],
+];
+const CAT_WORDS = {"꼬냑":"cognac brandy 코냑","블렌디드 위스키":"whisky scotch blended 블렌디드 위스키","싱글몰트 위스키":"whisky scotch single malt 싱글몰트 위스키","와인":"wine red 레드 와인","기타 증류주":"spirit 소주 증류주"};
+const STOP = new Set("보여줘 보여 찾아줘 찾아 알려줘 있어 있어? 있나 있는 뭐 뭐야 뭐가 술 병 내 나의 중에 중 것 거 거야 좀 전부 모두 다 해줘 줘 어떤 무슨 리스트 목록 몇 개 얼마나 이상 이하 미만 넘는 이상인 캐스크 cask 숙성 aged year years old yo over under how many show me find my the a an any with do i have all list what which is are of in bottles bottle please".split(" "));
+const PARTICLES = ["으로","에서","이랑","하고","까지","부터","은","는","이","가","을","를","로","에","도","만","랑","과","의"];
+const norm = s => String(s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").normalize("NFC");
+const ORIGIN = {"Nikka":"일본 japan","Mars":"일본 japan","Ki One":"한국 korea","Hwayo":"한국 korea","Trapiche":"아르헨티나 argentina","Caymus":"미국 usa","Château Talbot":"프랑스 france 보르도"};
+const originOf = b => ORIGIN[b.brand] || (b.category === "꼬냑" ? "프랑스 france" : b.category.includes("위스키") && b.brand !== "Sansibar" ? "스코틀랜드 scotland" : "");
+const SEARCH_TEXT = BOTTLES.map(b => norm([b.name,b.brand,b.category,CAT_WORDS[b.category]||"",originOf(b),b.age,b.era,b.notes,b.story||""].join(" ")));
+const ageNum = b => { const m = String(b.age).match(/(\d+)\s*(~\s*\d+\s*)?년/); return m ? +m[1] : null; };
+
+function expand(tok){
+  const t = norm(tok); const out = new Set([t]);
+  SYNONYMS.forEach(g => { const ng = g.map(norm); if (ng.some(w => w === t || (!t.includes(" ") && ((t.length >= 2 && w.startsWith(t)) || (w.length >= 2 && !w.includes(" ") && t.startsWith(w)))))) ng.forEach(w => out.add(w)); });
+  return [...out];
+}
+function tokenize(q){
+  let s = " " + norm(q).replace(/[?!.,·]/g," ") + " ";
+  const multi = SYNONYMS.flat().map(norm).filter(w => w.includes(" ")).sort((a,b)=>b.length-a.length);
+  const toks = [];
+  multi.forEach(w => { if (s.includes(" "+w+" ") || s.includes(" "+w)) { toks.push(w); s = s.split(w).join(" "); } });
+  s.split(/\s+/).filter(Boolean).forEach(w => {
+    if (/^(19|20)\d\d년?$/.test(w)) { toks.push(w.replace("년","")); return; }
+    if (/^\d/.test(w) || STOP.has(w)) return;
+    for (const p of PARTICLES) if (w.length > p.length + 1 && w.endsWith(p)) { const st = w.slice(0, -p.length); if (expand(st).length > 1 || SEARCH_TEXT.some(x => x.includes(st))) { w = st; break; } }
+    if (!STOP.has(w)) toks.push(w);
+  });
+  return toks;
+}
+function localSearch(q){
+  const nq = norm(q);
+  let ageCond = null;
+  const am = nq.match(/(\d+)\s*(년|years?|yo\b|y\b)/) || nq.match(/(?:over|under|than|below|above)\s*(\d+)/) || nq.match(/(\d+)\s*(?:이상|이하|미만|넘)/);
+  if (am && +am[1] < 1000) { const n = +am[1]; ageCond = { n, op: /(이상|넘|over|more than|above|or more|\+|plus)/.test(nq) ? ">=" : /(이하|미만|under|below|less than)/.test(nq) ? "<=" : "=" }; }
+  const toks = tokenize(q);
+  const unknown = [], used = [];
+  toks.forEach(t => { const syn = expand(t); if (SEARCH_TEXT.some(x => syn.some(w => x.includes(w)))) used.push(syn); else unknown.push(t); });
+  const r1 = rank(used, ageCond, true);
+  const res = r1.ids.length && !r1.partial ? r1 : rank(used, ageCond, false);
+  return { ...res, unknown, empty: !used.length && !ageCond };
+}
+const CATRULES = [["와인", c => c === "와인"], ["꼬냑", c => c === "꼬냑"], ["싱글몰트", c => c === "싱글몰트 위스키"], ["블렌디드", c => c === "블렌디드 위스키"], ["위스키", c => c.includes("위스키")], ["증류주", c => c === "기타 증류주"]];
+function rank(used, ageCond, strictCat){
+  let scored = BOTTLES.map((b, i) => {
+    let hit = used.filter(syn => { const rule = strictCat && CATRULES.find(([k]) => syn.includes(k)); return rule ? rule[1](b.category) : syn.some(w => SEARCH_TEXT[i].includes(w)); }).length;
+    let ageOk = true;
+    if (ageCond) { const n = ageNum(b); ageOk = n !== null && (ageCond.op === ">=" ? n >= ageCond.n : ageCond.op === "<=" ? n <= ageCond.n : (n === ageCond.n || String(b.age).includes(ageCond.n) || b.name.includes(String(ageCond.n)))); }
+    return { i, hit, ageOk };
+  }).filter(r => r.ageOk);
+  const need = used.length;
+  let exact = scored.filter(r => r.hit === need);
+  let partial = false;
+  if (!exact.length && need) { const max = Math.max(0, ...scored.map(r => r.hit)); if (max > 0) { exact = scored.filter(r => r.hit === max); partial = true; } }
+  if (!need && !ageCond) exact = [];
+  exact.sort((a, b) => BOTTLES[b.i].rank - BOTTLES[a.i].rank);
+  return { ids: exact.map(r => r.i), partial };
+}
+
+// ── AI 모드 (선택): 본인의 Anthropic API 키로 Claude에게 직접 질문 ──
+const store = { get(k){ try { return localStorage.getItem(k); } catch(e){ return store._m[k] || null; } }, set(k,v){ try { v===null?localStorage.removeItem(k):localStorage.setItem(k,v); } catch(e){ store._m[k]=v; } }, _m:{} };
+const CATALOG = BOTTLES.map((b,i) => [i,b.category,b.brand,b.name,b.age,b.era,b.notes,b.story||""].join(" | ")).join("\n");
+let chatHistory = [];
+async function aiSearch(q){
+  const key = store.get("liquorApiKey");
+  const sys = "너는 사용자의 개인 술장(아래 목록)을 안내하는 도우미다. 질문은 한국어나 영어로 온다. 반드시 목록에 있는 병만 근거로 답하고, 없는 병을 지어내지 마라. 답은 질문 언어로 2~3문장 이내. 오직 JSON 한 개만 출력: {\"answer\":\"...\",\"ids\":[번호,...]} (ids는 관련 병 번호, 관련도 순, 최대 20개, 없으면 []).\n\n번호 | 종류 | 브랜드 | 이름 | 숙성/등급/연도 | 유통연대 | 설명 | 배경\n" + CATALOG;
+  const messages = chatHistory.slice(-6).concat([{ role: "user", content: q }]);
+  const r = await fetch("https://api.anthropic.com/v1/messages", { method: "POST", headers: { "content-type": "application/json", "x-api-key": key, "anthropic-version": "2023-06-01", "anthropic-dangerous-direct-browser-access": "true" }, body: JSON.stringify({ model: "claude-haiku-4-5", max_tokens: 700, system: sys, messages }) });
+  if (!r.ok) throw new Error(r.status === 401 ? "API 키가 올바르지 않아요." : "AI 응답 오류 (" + r.status + ")");
+  const data = await r.json();
+  const text = (data.content || []).map(c => c.text || "").join("");
+  const m = text.match(/\{[\s\S]*\}/);
+  const out = m ? JSON.parse(m[0]) : { answer: text, ids: [] };
+  chatHistory.push({ role: "user", content: q }, { role: "assistant", content: text });
+  return { answer: out.answer || "", ids: (out.ids || []).filter(i => BOTTLES[i]) };
+}
+
+// ── 화면 ──
+document.body.insertAdjacentHTML("beforeend", `
+<button id="chat-fab" aria-label="술장 검색 열기"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>술장 검색</button>
+<section id="chat" hidden aria-label="술장 검색">
+  <header><b>술장 검색</b><span id="chat-mode"></span><button id="chat-set" aria-label="AI 설정">AI 설정</button><button id="chat-x" aria-label="닫기">✕</button></header>
+  <div id="chat-settings" hidden>
+    <p>AI 모드는 본인의 Anthropic API 키로 Claude에게 직접 묻는 방식이에요. 키는 이 기기 브라우저에만 저장되고 다른 곳으로 보내지지 않아요. 질문 한 번에 약 10원 정도 들어요.</p>
+    <input id="chat-key" type="password" placeholder="sk-ant-..." autocomplete="off">
+    <div class="row"><button id="chat-key-save">저장</button><button id="chat-key-del">키 삭제</button></div>
+  </div>
+  <div id="chat-log" aria-live="polite"></div>
+  <div id="chat-chips"></div>
+  <form id="chat-form"><input id="chat-in" placeholder="예: 셰리 캐스크 18년, Hennessy, 30년 이상" autocomplete="off" enterkeyhint="search"><button aria-label="보내기">↑</button></form>
+</section>`);
+const $ = id => document.getElementById(id);
+const log = $("chat-log");
+function updateMode(){ $("chat-mode").textContent = store.get("liquorApiKey") ? "AI 모드" : "기본 검색"; }
+function say(html, who){ log.insertAdjacentHTML("beforeend", `<div class="msg ${who}">${html}</div>`); const el = log.lastElementChild; showTop(el); return el; }
+function showTop(el){ log.scrollTop = Math.max(0, el.offsetTop - log.offsetTop - 8); }
+function resultList(ids){
+  if (!ids.length) return "";
+  const show = ids.slice(0, 30);
+  return `<ul class="hits">${show.map(i => { const b = BOTTLES[i]; return `<li><button data-i="${i}">${b.image ? `<img src="${b.image}" alt="">` : ""}<span><b>${esc(b.name)}</b><small>${esc(b.category)} · ${esc(b.age)}</small></span></button></li>`; }).join("")}</ul>${ids.length > 30 ? `<p class="more">외 ${ids.length - 30}병 더 있어요. 조건을 좁혀 보세요.</p>` : ""}`;
+}
+async function ask(q){
+  q = q.trim(); if (!q) return;
+  say(esc(q), "me"); $("chat-in").value = ""; $("chat-chips").hidden = true;
+  if (store.get("liquorApiKey")) {
+    const wait = say("찾는 중…", "bot");
+    try { const r = await aiSearch(q); wait.innerHTML = esc(r.answer) + resultList(r.ids); showTop(wait); return; }
+    catch (e) { wait.innerHTML = (/^(API|AI)/.test(e.message) ? esc(e.message) : "AI에 연결하지 못했어요.") + " 기본 검색으로 찾을게요."; }
+  }
+  const r = localSearch(q);
+  let msg;
+  if (r.empty) msg = "브랜드, 종류, 숙성연수, 캐스크 같은 단어로 물어봐 주세요. 예: '맥캘란 셰리', 'cognac XO', '20년 이상 블렌디드'";
+  else if (!r.ids.length) msg = "술장에서 맞는 병을 찾지 못했어요." + (r.unknown.length ? ` ('${esc(r.unknown.join("', '"))}'는 목록에 없는 표현이에요.)` : "");
+  else msg = `${r.partial ? "모든 조건에 맞는 병은 없어서 가장 가까운 병을 보여드려요. " : ""}${r.ids.length}병을 찾았어요.` + (r.unknown.length ? ` ('${esc(r.unknown.join("', '"))}'는 찾지 못해 빼고 검색했어요.)` : "");
+  say(msg + resultList(r.ids), "bot");
+}
+function jump(i){
+  const el = document.getElementById("b" + i); if (!el) return;
+  for (let p = el.parentElement; p; p = p.parentElement) if (p.tagName === "DETAILS") p.open = true;
+  if (matchMedia("(max-width:700px)").matches) $("chat").hidden = true;
+  el.scrollIntoView({ behavior: "smooth", block: "center" });
+  el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
+}
+$("chat-fab").onclick = () => { $("chat").hidden = false; updateMode(); if (!log.children.length) say("영어나 한국어로 물어보세요. 술장에서 맞는 병을 찾아 드려요. 결과를 누르면 해당 병으로 이동해요.", "bot"); $("chat-in").focus(); };
+$("chat-x").onclick = () => { $("chat").hidden = true; };
+$("chat-set").onclick = () => { $("chat-settings").hidden = !$("chat-settings").hidden; };
+$("chat-key-save").onclick = () => { const v = $("chat-key").value.trim(); if (!/^sk-ant-/.test(v)) { $("chat-key").setCustomValidity("sk-ant- 로 시작하는 키를 넣어 주세요"); $("chat-key").reportValidity(); return; } store.set("liquorApiKey", v); $("chat-key").value = ""; $("chat-settings").hidden = true; updateMode(); say("AI 모드를 켰어요. 이제 '선물하기 좋은 꼬냑'처럼 자유롭게 물어보셔도 돼요.", "bot"); };
+$("chat-key").oninput = () => $("chat-key").setCustomValidity("");
+$("chat-key-del").onclick = () => { store.set("liquorApiKey", null); chatHistory = []; $("chat-settings").hidden = true; updateMode(); say("API 키를 지우고 기본 검색으로 돌아왔어요.", "bot"); };
+$("chat-form").onsubmit = e => { e.preventDefault(); ask($("chat-in").value); };
+log.onclick = e => { const b = e.target.closest("button[data-i]"); if (b) jump(+b.dataset.i); };
+$("chat-chips").innerHTML = ["셰리 캐스크 18년", "Hennessy", "30년 이상 위스키", "Japanese whisky", "와인"].map(t => `<button>${t}</button>`).join("");
+$("chat-chips").onclick = e => { if (e.target.tagName === "BUTTON") ask(e.target.textContent); };
 </script>
 </body>
 </html>
