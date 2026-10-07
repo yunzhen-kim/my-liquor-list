@@ -37,7 +37,13 @@ dt{color:var(--muted)} dd{margin:0}
 .est{color:var(--brass);font-size:12px;margin-left:4px}
 .note{margin:8px 0 0;font-size:14px}
 .summary{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:0 0 8px}
-.summary div{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 6px;text-align:center}
+.summary button{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 6px;text-align:center;color:var(--ink);font:inherit;cursor:pointer;transition:border-color .15s,transform .1s}
+.summary button:hover{border-color:var(--brass)}
+.summary button:active{transform:scale(.97)}
+.summary button:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.cat>summary.flash-cat{animation:flashcat 1.4s ease}
+@keyframes flashcat{0%,40%{color:var(--brass)}100%{color:inherit}}
+.cat{scroll-margin-top:12px}
 .summary span{display:block;font-size:12px;color:var(--muted)}
 .summary b{font:700 18px/1.3 "Noto Serif KR",serif}
 .summary .total{border-color:var(--brass)}
@@ -1835,11 +1841,27 @@ function card(b){
 // 브랜드는 알파벳순, 브랜드 안에서는 rank(높을수록 고급) 내림차순
 const countOf = f => BOTTLES.filter(b => f(b.category)).length;
 document.getElementById("summary").innerHTML = [
-  ["꼬냑", countOf(c => c === "꼬냑")],
-  ["위스키", countOf(c => c.includes("위스키"))],
-  ["와인", countOf(c => c === "와인")],
-  ["기타", countOf(c => c === "기타 증류주")],
-].map(([k, n]) => `<div><span>${k}</span><b>${n}병</b></div>`).join("") + `<div class="total"><span>전체</span><b>${BOTTLES.length}병</b></div>`;
+  ["꼬냑", countOf(c => c === "꼬냑"), "꼬냑"],
+  ["위스키", countOf(c => c.includes("위스키")), "위스키"],
+  ["와인", countOf(c => c === "와인"), "와인"],
+  ["기타", countOf(c => c === "기타 증류주"), "기타 증류주"],
+].map(([k, n, t]) => `<button type="button" data-go="${t}" aria-label="${k} ${n}병으로 이동"><span>${k}</span><b>${n}병</b></button>`).join("") + `<button type="button" class="total" data-go="" aria-label="전체 ${BOTTLES.length}병 보기"><span>전체</span><b>${BOTTLES.length}병</b></button>`;
+// 상단 요약 단추: 누르면 해당 종류를 펼치고 그 위치로 이동. '전체'는 모두 펼치고 목록 처음으로 이동.
+document.getElementById("summary").addEventListener("click", e => {
+  const btn = e.target.closest("button[data-go]"); if (!btn) return;
+  const go = btn.dataset.go;
+  if (!go) {
+    document.querySelectorAll("#app details").forEach(d => { d.open = true; });
+    app.scrollIntoView({ behavior: "smooth", block: "start" });
+    return;
+  }
+  const el = document.getElementById("cat-" + go); if (!el) return;
+  el.open = true;
+  el.querySelectorAll("details").forEach(d => { d.open = true; });
+  el.scrollIntoView({ behavior: "smooth", block: "start" });
+  const sum = el.querySelector("summary");
+  sum.classList.remove("flash-cat"); void sum.offsetWidth; sum.classList.add("flash-cat");
+});
 
 // 화면 구조: 꼬냑 / 위스키(블렌디드·싱글몰트 > 원산지 > 브랜드) / 와인 / 기타 증류주
 // 위스키 병은 region 값(아래 REGIONS 중 하나)으로 원산지 칸이 정해집니다. 비어 있는 원산지 칸은 숨깁니다.
@@ -1868,7 +1890,7 @@ app.innerHTML = TOP.map(([top, cats]) => {
       return `<details class="subcat" open><summary>${cat}<small>${sub.length}병</small></summary>${regions || EMPTY}</details>`;
     }).join("");
   } else body = brandBlocks(list) || EMPTY;
-  return `<details class="cat" open><summary>${top}<small>${list.length}병</small></summary>${body}</details>`;
+  return `<details class="cat" id="cat-${top}" open><summary>${top}<small>${list.length}병</small></summary>${body}</details>`;
 }).join("");
 
 // ───────── 술장 검색 (대화창) ─────────
