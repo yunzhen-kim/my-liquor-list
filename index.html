@@ -62,7 +62,13 @@ dt{color:var(--muted)} dd{margin:0}
 .subcat:not([open])>summary::before,.region:not([open])>summary::before{content:"▸"}
 .subcat>summary small,.region>summary small{margin-left:auto;font:500 13px "Noto Sans KR",sans-serif;color:var(--muted)}
 .region{margin:0 0 6px}
-.region>.brand{margin-left:12px}
+.region>.brand,.region>.indie{margin-left:12px}
+.indie>summary{cursor:pointer;list-style:none;display:flex;align-items:baseline;font:500 14px/1.4 "Noto Sans KR",sans-serif;color:var(--muted);padding:6px 0 4px;margin-bottom:4px;border-top:1px dashed var(--line)}
+.indie>summary::-webkit-details-marker{display:none}
+.indie>summary::before{content:"▾";color:var(--brass);margin-right:8px}
+.indie:not([open])>summary::before{content:"▸"}
+.indie>summary small{margin-left:auto;font:500 13px "Noto Sans KR",sans-serif;color:var(--muted)}
+.indie>.brand{margin-left:12px}
 @media (max-width:420px){.region>.brand{margin-left:6px}}
 .brand{margin-bottom:10px}
 .brand>summary{cursor:pointer;font:700 16px/1.4 "Noto Serif KR",serif;padding:8px 0;display:flex;justify-content:space-between;align-items:baseline;list-style:none;border-bottom:1px solid var(--line);margin-bottom:10px}
@@ -212,7 +218,7 @@ const BOTTLES = [
   "brand": "Bell's",
   "rank": 20,
   "rankEstimated": false,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -226,7 +232,7 @@ const BOTTLES = [
   "rank": 90,
   "rankEstimated": true,
   "story": "1992년 출시된 조니워커 최상위 레귤러 블렌드. 1만 개 캐스크 가운데 하나꼴로 골라낸 원액을 쓴다고 알려져 있다.",
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -240,7 +246,7 @@ const BOTTLES = [
   "rank": 95,
   "rankEstimated": true,
   "story": "조니워커 200주년(1820~2020) 기념. 존 워커가 가게를 연 1820년에 이미 운영되던 8개 증류소 원액만 썼다.",
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -253,7 +259,7 @@ const BOTTLES = [
   "brand": "Johnnie Walker",
   "rank": 30,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -266,7 +272,7 @@ const BOTTLES = [
   "brand": "Johnnie Walker",
   "rank": 40,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -279,7 +285,7 @@ const BOTTLES = [
   "brand": "Johnnie Walker",
   "rank": 80,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -293,7 +299,7 @@ const BOTTLES = [
   "rank": 50,
   "rankEstimated": true,
   "story": "1961년 아내 리타를 잃은 타케츠루 마사타카가 슬픔을 딛고 직접 블렌딩해 1962년 내놓은 위스키. 처음엔 손으로 분 유리병에 담겨 나왔다.",
-  "region": "일본 위스키"
+  "country": "재패니즈 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -306,7 +312,7 @@ const BOTTLES = [
   "brand": "Nikka",
   "rank": 70,
   "rankEstimated": true,
-  "region": "일본 위스키"
+  "country": "재패니즈 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -319,7 +325,7 @@ const BOTTLES = [
   "brand": "Nikka",
   "rank": 60,
   "rankEstimated": true,
-  "region": "일본 위스키"
+  "country": "재패니즈 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -332,7 +338,7 @@ const BOTTLES = [
   "brand": "Ballantine's",
   "rank": 21,
   "rankEstimated": false,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -345,7 +351,7 @@ const BOTTLES = [
   "brand": "Macallan",
   "rank": 0,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -358,7 +364,7 @@ const BOTTLES = [
   "brand": "Clynelish",
   "rank": 31,
   "rankEstimated": false,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -371,7 +377,7 @@ const BOTTLES = [
   "brand": "Glenlivet",
   "rank": 13,
   "rankEstimated": false,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -384,7 +390,7 @@ const BOTTLES = [
   "brand": "Glengoyne",
   "rank": 25,
   "rankEstimated": false,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -398,7 +404,7 @@ const BOTTLES = [
   "rank": 95,
   "rankEstimated": false,
   "story": "닛카 창업자 타케츠루 마사타카의 이름을 딴 라인. 21년은 World Whiskies Awards 최고 블렌디드 몰트에 여러 번 뽑혔다.",
-  "region": "일본 위스키"
+  "country": "재패니즈 위스키"
  },
  {
   "category": "꼬냑",
@@ -436,7 +442,7 @@ const BOTTLES = [
   "rank": 21,
   "rankEstimated": false,
   "story": "로열 살루트의 플라곤 색은 왕관 보석을 뜻해 사파이어(청색)·에메랄드·루비 버전이 있다.",
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -449,7 +455,7 @@ const BOTTLES = [
   "brand": "Whyte & Mackay",
   "rank": 21,
   "rankEstimated": false,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "꼬냑",
@@ -474,7 +480,7 @@ const BOTTLES = [
   "brand": "Ballantine's",
   "rank": 12,
   "rankEstimated": false,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "꼬냑",
@@ -499,7 +505,7 @@ const BOTTLES = [
   "brand": "Glenfiddich",
   "rank": 18,
   "rankEstimated": false,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -513,7 +519,7 @@ const BOTTLES = [
   "rank": 50,
   "rankEstimated": true,
   "story": "1909년 'Extra Special'에서 블랙 라벨로 이름이 정착했다. 24도 기울어진 라벨이 상징이다.",
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "꼬냑",
@@ -539,7 +545,7 @@ const BOTTLES = [
   "brand": "Glenfiddich",
   "rank": 30,
   "rankEstimated": false,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -553,7 +559,7 @@ const BOTTLES = [
   "rank": 93,
   "rankEstimated": true,
   "story": "1992년 출시된 조니워커 최상위 레귤러 블렌드. 1만 개 캐스크 가운데 하나꼴로 골라낸 원액을 쓴다고 알려져 있다.",
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -566,7 +572,7 @@ const BOTTLES = [
   "brand": "Macallan",
   "rank": 55,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "꼬냑",
@@ -694,7 +700,7 @@ const BOTTLES = [
   "rank": 97,
   "rankEstimated": true,
   "story": "1934년 조지 5세가 조니워커에 왕실 납품 허가(Royal Warrant)를 내린 것을 기념한 블렌드.",
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -708,7 +714,7 @@ const BOTTLES = [
   "rank": 21,
   "rankEstimated": false,
   "story": "로열 살루트의 플라곤 색은 왕관 보석을 뜻해 사파이어(청색)·에메랄드·루비 버전이 있다.",
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -721,7 +727,7 @@ const BOTTLES = [
   "brand": "Macallan",
   "rank": 60,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -734,7 +740,7 @@ const BOTTLES = [
   "brand": "Mars",
   "rank": 0,
   "rankEstimated": false,
-  "region": "일본 위스키"
+  "country": "재패니즈 위스키"
  },
  {
   "category": "꼬냑",
@@ -762,7 +768,7 @@ const BOTTLES = [
   "rank": 75,
   "rankEstimated": true,
   "story": "1920년 창립 100주년 때 알렉산더 워커 경이 구상했지만 원액이 부족해 미뤄졌다가, 1990년대에 'Centenary Blend'로 출시됐다.",
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -776,7 +782,7 @@ const BOTTLES = [
   "rank": 52,
   "rankEstimated": true,
   "story": "1909년 'Extra Special'에서 블랙 라벨로 이름이 정착했다. 24도 기울어진 라벨이 상징이다.",
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -789,7 +795,7 @@ const BOTTLES = [
   "brand": "Macallan",
   "rank": 58,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -802,7 +808,7 @@ const BOTTLES = [
   "brand": "Clynelish",
   "rank": 14,
   "rankEstimated": false,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "꼬냑",
@@ -841,7 +847,7 @@ const BOTTLES = [
   "brand": "GlenAllachie",
   "rank": 17,
   "rankEstimated": false,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -854,7 +860,7 @@ const BOTTLES = [
   "brand": "Johnnie Walker",
   "rank": 99,
   "rankEstimated": false,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -867,7 +873,7 @@ const BOTTLES = [
   "brand": "Ballantine's",
   "rank": 30,
   "rankEstimated": false,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -880,7 +886,7 @@ const BOTTLES = [
   "brand": "GlenDronach",
   "rank": 30,
   "rankEstimated": false,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "꼬냑",
@@ -907,7 +913,7 @@ const BOTTLES = [
   "brand": "Johnnie Walker",
   "rank": 60,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -921,7 +927,7 @@ const BOTTLES = [
   "brand": "Dunhill",
   "rank": 75,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -936,7 +942,7 @@ const BOTTLES = [
   "rank": 50,
   "rankEstimated": true,
   "story": "1932년 알렉산더 워커 경의 마지막 블렌드. 흔들리는 배 위에서도 쓰러지지 않도록 바닥이 둥근 병을 만들었다고 한다.",
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -951,7 +957,7 @@ const BOTTLES = [
   "rank": 76,
   "rankEstimated": true,
   "story": "1920년 창립 100주년 때 알렉산더 워커 경이 구상했지만 원액이 부족해 미뤄졌다가, 1990년대에 'Centenary Blend'로 출시됐다.",
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -966,7 +972,7 @@ const BOTTLES = [
   "rank": 70,
   "rankEstimated": true,
   "story": "1920년 창립 100주년 때 알렉산더 워커 경이 구상했지만 원액이 부족해 미뤄졌다가, 1990년대에 'Centenary Blend'로 출시됐다.",
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -980,7 +986,7 @@ const BOTTLES = [
   "brand": "Macallan",
   "rank": 40,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -995,7 +1001,7 @@ const BOTTLES = [
   "rank": 58,
   "rankEstimated": true,
   "story": "1932년 알렉산더 워커 경의 마지막 블렌드. 흔들리는 배 위에서도 쓰러지지 않도록 바닥이 둥근 병을 만들었다고 한다.",
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -1010,7 +1016,7 @@ const BOTTLES = [
   "rank": 52,
   "rankEstimated": true,
   "story": "1932년 알렉산더 워커 경의 마지막 블렌드. 흔들리는 배 위에서도 쓰러지지 않도록 바닥이 둥근 병을 만들었다고 한다.",
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1024,7 +1030,7 @@ const BOTTLES = [
   "brand": "Macallan",
   "rank": 62,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "꼬냑",
@@ -1051,7 +1057,7 @@ const BOTTLES = [
   "brand": "Johnnie Walker",
   "rank": 83,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "꼬냑",
@@ -1092,7 +1098,7 @@ const BOTTLES = [
   "brand": "Johnnie Walker",
   "rank": 20,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1106,7 +1112,7 @@ const BOTTLES = [
   "brand": "Bunnahabhain",
   "rank": 12,
   "rankEstimated": false,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1121,7 +1127,7 @@ const BOTTLES = [
   "rank": 55,
   "rankEstimated": true,
   "story": "빌 럼스덴 박사가 커피 로스팅에서 영감을 받아 초콜릿 몰트를 썼다.",
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "와인",
@@ -1149,7 +1155,7 @@ const BOTTLES = [
   "rank": 45,
   "rankEstimated": true,
   "story": "1961년 아내 리타를 잃은 타케츠루 마사타카가 슬픔을 딛고 직접 블렌딩해 1962년 내놓은 위스키. 처음엔 손으로 분 유리병에 담겨 나왔다.",
-  "region": "일본 위스키"
+  "country": "재패니즈 위스키"
  },
  {
   "category": "꼬냑",
@@ -1176,7 +1182,7 @@ const BOTTLES = [
   "brand": "Macallan",
   "rank": 68,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1190,7 +1196,7 @@ const BOTTLES = [
   "brand": "Macallan",
   "rank": 35,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1204,7 +1210,7 @@ const BOTTLES = [
   "brand": "GlenDronach",
   "rank": 18,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1219,7 +1225,7 @@ const BOTTLES = [
   "rank": 18,
   "rankEstimated": true,
   "story": "이름은 1826년 증류소를 세운 제임스 알라다이스에서 따왔다.",
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1232,7 +1238,7 @@ const BOTTLES = [
   "brand": "GlenDronach",
   "rank": 24,
   "rankEstimated": false,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1247,7 +1253,7 @@ const BOTTLES = [
   "rank": 21,
   "rankEstimated": true,
   "story": "몰트 마스터 데이비드 스튜어트가 개척한 캐스크 피니시 기법의 대표작.",
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1260,7 +1266,7 @@ const BOTTLES = [
   "brand": "Springbank",
   "rank": 28,
   "rankEstimated": false,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -1274,7 +1280,8 @@ const BOTTLES = [
   "brand": "Sansibar",
   "rank": 21,
   "rankEstimated": true,
-  "region": "독립병입자"
+  "country": "스카치 위스키",
+  "indie": true
  },
  {
   "category": "블렌디드 위스키",
@@ -1288,7 +1295,7 @@ const BOTTLES = [
   "brand": "Johnnie Walker",
   "rank": 92,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1301,7 +1308,7 @@ const BOTTLES = [
   "brand": "GlenDronach",
   "rank": 29,
   "rankEstimated": false,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1315,7 +1322,7 @@ const BOTTLES = [
   "brand": "GlenDronach",
   "rank": 28,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1329,7 +1336,7 @@ const BOTTLES = [
   "brand": "Macallan",
   "rank": 45,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1342,7 +1349,7 @@ const BOTTLES = [
   "brand": "Macallan",
   "rank": 92,
   "rankEstimated": false,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -1357,7 +1364,7 @@ const BOTTLES = [
   "rank": 96,
   "rankEstimated": true,
   "story": "1934년 조지 5세가 조니워커에 왕실 납품 허가(Royal Warrant)를 내린 것을 기념한 블렌드.",
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -1371,7 +1378,7 @@ const BOTTLES = [
   "brand": "Ballantine's",
   "rank": 30,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1385,7 +1392,7 @@ const BOTTLES = [
   "brand": "GlenDronach",
   "rank": 19,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1398,7 +1405,7 @@ const BOTTLES = [
   "brand": "Dalmore",
   "rank": 18,
   "rankEstimated": false,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1412,7 +1419,7 @@ const BOTTLES = [
   "brand": "Glenfiddich",
   "rank": 22,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1427,7 +1434,7 @@ const BOTTLES = [
   "rank": 21,
   "rankEstimated": true,
   "story": "이름은 증류소 주변 나무에 모여 사는 떼까마귀 무리(a parliament of rooks)에서 따왔다.",
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1440,7 +1447,8 @@ const BOTTLES = [
   "brand": "Signatory Vintage",
   "rank": 17,
   "rankEstimated": false,
-  "region": "독립병입자"
+  "country": "스카치 위스키",
+  "indie": true
  },
  {
   "category": "싱글몰트 위스키",
@@ -1453,7 +1461,7 @@ const BOTTLES = [
   "brand": "Glenturret",
   "rank": 15,
   "rankEstimated": false,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1467,7 +1475,7 @@ const BOTTLES = [
   "rank": 10,
   "rankEstimated": false,
   "story": "랄리크 그룹 인수 뒤 2020년 처음 선보인 'Maiden Release' 라인.",
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -1482,7 +1490,7 @@ const BOTTLES = [
   "rank": 75,
   "rankEstimated": true,
   "story": "1920년 창립 100주년 때 알렉산더 워커 경이 구상했지만 원액이 부족해 미뤄졌다가, 1990년대에 'Centenary Blend'로 출시됐다.",
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -1497,7 +1505,7 @@ const BOTTLES = [
   "rank": 90,
   "rankEstimated": true,
   "story": "1992년 출시된 조니워커 최상위 레귤러 블렌드. 1만 개 캐스크 가운데 하나꼴로 골라낸 원액을 쓴다고 알려져 있다.",
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1510,7 +1518,7 @@ const BOTTLES = [
   "brand": "Macallan",
   "rank": 56,
   "rankEstimated": false,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1524,7 +1532,7 @@ const BOTTLES = [
   "brand": "GlenAllachie",
   "rank": 15,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1537,7 +1545,7 @@ const BOTTLES = [
   "brand": "Macallan",
   "rank": 80,
   "rankEstimated": false,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "기타 증류주",
@@ -1564,7 +1572,7 @@ const BOTTLES = [
   "brand": "Macallan",
   "rank": 60,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1578,7 +1586,7 @@ const BOTTLES = [
   "brand": "Macallan",
   "rank": 70,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1592,7 +1600,7 @@ const BOTTLES = [
   "brand": "Macallan",
   "rank": 40,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1607,7 +1615,7 @@ const BOTTLES = [
   "rank": 18,
   "rankEstimated": true,
   "story": "이름은 1826년 증류소를 세운 제임스 알라다이스에서 따왔다.",
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1621,7 +1629,7 @@ const BOTTLES = [
   "brand": "GlenDronach",
   "rank": 12,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1635,7 +1643,7 @@ const BOTTLES = [
   "brand": "GlenDronach",
   "rank": 14,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1649,7 +1657,7 @@ const BOTTLES = [
   "brand": "Edradour",
   "rank": 12,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1663,7 +1671,7 @@ const BOTTLES = [
   "rank": 18,
   "rankEstimated": false,
   "eraBasis": "라벨·패키지 디자인 기준",
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1677,7 +1685,7 @@ const BOTTLES = [
   "rank": 23,
   "rankEstimated": false,
   "eraBasis": "라벨·패키지 디자인 기준",
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "꼬냑",
@@ -1719,7 +1727,7 @@ const BOTTLES = [
   "rankEstimated": true,
   "story": "1263년 수사슴에게서 목숨을 구한 스코틀랜드 왕 알렉산더 3세의 이름을 땄다.",
   "eraBasis": "라벨·패키지 디자인 기준",
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "싱글몰트 위스키",
@@ -1734,7 +1742,7 @@ const BOTTLES = [
   "rankEstimated": true,
   "story": "'기원'은 '시작'이라는 뜻. 호랑이·독수리·유니콘으로 이어지는 시그니처 라인 가운데 하나.",
   "eraBasis": "라벨·패키지 디자인 기준",
-  "region": "한국 위스키"
+  "country": "한국 위스키"
  },
  {
   "category": "와인",
@@ -1787,7 +1795,8 @@ const BOTTLES = [
   "brand": "Cadenhead's",
   "rank": 16,
   "rankEstimated": false,
-  "region": "독립병입자"
+  "country": "스카치 위스키",
+  "indie": true
  },
  {
   "category": "싱글몰트 위스키",
@@ -1802,7 +1811,7 @@ const BOTTLES = [
   "brand": "Suntory",
   "rank": 15,
   "rankEstimated": true,
-  "region": "일본 위스키"
+  "country": "재패니즈 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -1817,7 +1826,7 @@ const BOTTLES = [
   "brand": "Johnnie Walker",
   "rank": 22,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -1832,7 +1841,7 @@ const BOTTLES = [
   "brand": "King George IV",
   "rank": 30,
   "rankEstimated": true,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "블렌디드 위스키",
@@ -1847,7 +1856,7 @@ const BOTTLES = [
   "brand": "Johnnie Walker",
   "rank": 51,
   "rankEstimated": false,
-  "region": "스카치 위스키"
+  "country": "스카치 위스키"
  },
  {
   "category": "버번 위스키",
@@ -1861,7 +1870,9 @@ const BOTTLES = [
   "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCADAAJADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDh/wCzDjrSHTTXU/Zh6Uhth6VFirmHoulJNrNhFOu+J7iNXX1BYZFZWsrcjWJ5nmZQ8jDdkIMA446D8q7vRbb/AInVhj/n4j/9CFP8WeH9Jhe2trYSWjFC/nI+CxLdDx6nqaE1F2HZuNzzaKC3lkctcR5Xktuz/Wui1yzhfTdFu4gDJcWpMzAY3MrsufrjH5VpaP4ft1nntrmae4E6+UGkKnyzjdkZHXirWr2UENlYW9sm2KJHCge7ZpyknZBFWTZxLWx9Kja2PpXRm1HpUbWo9KiwXOca2PpW3oSiHQfE+1nBOlTbh2Iyo/qae1sPSrEMflaH4nwOukyj/wAfjoa0BM81upSPsi7QUFsF2/XcSfrk5rOkj43DketWr4/8e/8A1wT+tMs4JbqVIIF3SOTgfzJ9B3zWq2IKm2njkY4r1HQvA9pbRxy36i4nz8yupK4x/CAf1P5Cta40HTvsyLNp8QDEjDQLx6HIwaxdeKZoqTPFyOtKq5Ndh4m8JG0ha807c0KrukiJyV9Sp6kDuDyPeuTWtYyUldENNbnofwtcy+O9DyFBFjOuVGMgRygZ9TgCvU16CvKPhQ2PHOj46/Y5/wD0CWvWAOBS6jMbFIVFSY4ppFMQtrIbe7hmQDdG6uM+oOa3PH9hLFaQAyQuhmkADx/Nx/tr8wHt0rK02D7TqNrD/flVT9M8/pXWeMJEl0eB1A3yXMhBI529f61D+JFr4Wec+H7KeTUS6ShVU5Ozc+M5x94/WtHV0xME6hR/OregSw2eps9xa/aFHzKu8qAc9TjqOelR60v78NjHBU/UcUn8SHH4WYzIKiZKtMKjYVZBUZBSXCgeG/E7emmP/wCjI6mYU28GPC/in/sGkf8AkWOk9gW54/fZzB/1wT+VeifDTRVitzqFwgLSjCg/3T0H07/lXn8kRnurSIdZI4k/Piva4bUxaRFFbSfZyE4bHT/IxUVpWjYumtbjRfiLV54yX8sIvPJAPX+tS3Ou6VANlxewDcMbd2T+Vedyabq+o6/Jpks7SzDLMS5KBcZz9On51o6ZoZh8L6o95ZeVc7G2vJH8ykdhz+vH41g4Jbs05mdPZzWt2Ghhu1bPKsAQVPYjI69q8t8XaZ/ZesyJGmyGXLovZTnDL+B/Qiuj8N6fdJKrXTCFVOSCwLEcccVN8TYlls4LgAb1cEn2YFT+qrWlN8srEz1jcg+FRz450f8A685//QJK9dHSvIPhQc+PNGA5P2SYf+OSV7AOlb9TIyytMZTTbiVkGaoDUTv2sPxpsk6bw1CzamJMYEaOwPQZxgfzqTxBP5ssADfu4YnYAHIPzdf0rHi1i4trOdIQuJExuPVcEHj8q5q+uZwVBkkKsvJMr5zgE9/c1y1q6pT1R0U4c8bHZ+HJoItVM9yFKCPeA3rkGoNZk+0vLNjB3hmGehKjP61wP9o3EFuXjkk3Kyr80r9Mj3roLDVJb77UjFSML0+g/wDr1EcUqjSsN0uRN3J2FS21v56yAdQM5qpNcCMYIq1pOpRRrPuXO5cCuy19Dnv1KAUjIY5OaL47fCfij305h/5EjpFbczfWotUcDwz4kX105/8A0NKUtENbnmGmDdr+lKe/k/yr1i61CKCHbxlMArjqNtePRzi21GxnbpEIXP0GDXYeMLyeC5WKJUVHRW8zqSRxxnpWdSPM0XB2TKWr38/9sXFw1u8bu2+Is+11AAArqtM8TLqGiyRSRE3UUZLLg7dq85J/DFcLZxzXNwGeJrpyMmNtxLqAckEcjGOta0uqhNHmtbSyktIlUrK27c5ZuiknlVP0yemamUU9Bp9TbjmgmxMcJIzj5AOFA7D9Kz/GkhfQAzkbiR06ffGB+hrno9TubYoVfcq/wuM1o+MLsy6LpyFdrzYdkBzjAJ/m4/KnGDUkDldMtfCT/kf9I4Jxay9D/wBM3r2Feg+leR/CWF/+E80v5cYspTk9B8j/AONeuDoK26mfQwrpwsXzDIxWQjxvLgDmsW08Wx3135JjKKw4zV7zSswwKLhax0sUAks5AvDcYOKxdatngeMPtUkqyhyF3DGMjPXpWr9uWytEZgGZxjZnH41iXl3PqF/CRG0a52l5JSygeh9vpXnY3lckutjqw8JNNooFIr+GZbcLIAQcRkHkdq39D05YhfzKRtwmxSeewPFc+L27QZiTc+f4XA49AcdK1fDt/dD7SssMq5QFS8u/nPPb+VcuH0mtVa/c2qwbi9C1dIOehqi0U0UZePAU1cgfezB/WukTT7I6YZgp3Y55r3NzgjHmOJgZ93Lc1NqxU+G/ERXOf7NbP18xKr6iYba93KcZPrRNcLceFPE7L1GnuP8AyJHUy2Hy2djya9Pzxf8AXFP/AEGuy04p4g0S1PLX1n+6cHoRj5SfqBj6g+tcbeD54v8ArjH/AOg1NpGoT6Xepc2pUsOGRxlXXurD0/8A105R5loSnZ6no3htJNJ1e1maNlRg0TkDoh7/AIHFJ8SbiKSaKGONDNBGWllC/Nz0XPp3x71PpfinS763AkmSCYKcw3RwS3s/3SOe+DVjUpNC8iX7Ze2IRirELMCW9eFySa5tVK7Rvo1ocvpGhveSmS4ULbqRvzxkYyR9PU9hmuf8R6guo6tJLCc28Y8uL3A7/icn8q1/FPihb6J7LS1eOx6F3GHcf3R6L+p71yddEIvdmMmtkeifCJsePNNPpYTf+i2r1odBXkHwmIHjey3f9A+bH12NXr/en1F0PneDUIkdYUjBfzBtcda7u3Z4VDTIS2P4m24q/L4D0nQZY9Tt7z7VLbtvWM9CcHH+NR6lqOlLDDGAy3XlbnlkPJPfA+vH0rkxdSUXyRdjrw0IyXNJGxotrdXlhJcm60W2iJKh76QI5PouQT+VNtRHFLJG93ZXrzJ5SiGeUlCT/CcCuIn1hdoUyvIFPyjccAew7VVXWAMhgW564xXn8k3rY7LxWlzstUsJbSfM0U1uzchJNy5x3HSq0d8IXBMEYYDG45B//X71yo1pQSVjYk84xjmrFrrKSMfMATA6Vk6MlqkaKcXo2dJHqtu7bJVkhfPEnUfj7V0lhrMM9tNp7sFuIwDwchgehB7g1xskmkyaZ5pndb0HO1R8pU9Oc9vTFZWq2t5dxWM+klzKm+JmXuuQVB+mWruwdWcJKnLY5cRGNudF/wAYBkaPYGIJ5IFSWjovhnxHCmcnS5HOf+ukdZUEviNF8q4thIB0JFaFqt42leJpL6Py5P7JkUKB23oa7pxe5xc93Y86vD88X/XFP/QajRiuQO/FaNtp0+q6lbWdn5ZnkgXaHYLnCZwPfjgd6uWHhi7ltXvLxXhsxZveq8YDs6qwUgDPBBPIPIFa8yW5nZsxPrSqB2/Su+tdAi0XxF4antme4t7udWE7EEYZAVQr2PJP5ehpb7w7Fe6c9+6sLpre1xzjMhcK7Ee6sv8AOp9qh8jOBpO9dpe+CWF9Nb2lzz5ypDvGQ4csUOR0wilyfTHrXK3Wn3FsN8mzySGaOXdhZApwduepyen1qlNS2E4tbnY/Clv+K3sMnrYzD/xxq9irxn4Vn/iuNO/68pf/AEBq9mpdQ6HnIbUQrm8OIQjZzxzjiuf1VJJrlfJx/qcE9e9ej+M9Pe/0YWtsi+dNMiKTwMk4GfxIrza0t7K1sBPdxWjZlMTvKDIxIOCsaAgDAwxYg9QBXPUw/PNTubU6/LHksY81neIxyjMc46YpiWlwWG6Nvpg8VrJHaX11ObTS9QuIogSDbx7RtUZJbHTA5+nWt7T/AA/NrGjXdxaQ2lhd29xNaraiIszNHA0p3S7sgkKwGBjIqXRaXxfgae1XY5b7BIIj+7bJ9jVc2cyAnYx4PUVtmG+idoNX0EyotvBOXgLLLHHLgRNkNzu3AAHnJxxVBX0qK88if7bENpP+kq649MgOTj3xSWHf8w3XXYSOCY2+0qcZHbpXSaIL230tVte8jFs/Ra52601b2GwW2UwC7kWNGjkaRJM9wDlgyngrk9Rj37b4RWUMWlXQM/2iQuPMU/8ALNhkbfbjBx7mqjh3GSk2ROvzR5bFYy6vnOP0pk5um03xE17wW0mVV+u5D/SvSfIi/wCea/lXNeM4kXR9a2qB/wAS6Xp9VraSsjCO54zp3kjWLRri5a2CQq6SqcYkCZTJwcDcBk4rqtU8brbpLaafBb3EbqxctkxrI4Bk2eqklxjgHOfSuLvky8HPHkx/+g1W24NU4KWrHzNaI6GHU9f167jgtpnLRlZVSLEaRbM7Wz/CF3EZJqxdWviG0imvI9RF0qqfOa3uhMyKTk7h1xkAk9OlSeDxC+j6hGyNIBNFJcImd7QBW6Y5wHKk9uma3NKcyairIFk8m7x5sgORbBT5khOSNrAKMEf0rOUrOyRSjdXuc1p3i69t4WhuR5yGNo1kQ7JY8qqZVvUKoAyOmfXNXtW1q0ayvZ7CePbJHDbW1vIgMkKKSWUg5yDnJbuTXIzlDNJ5QIjLHYD/AHc8fpURFa8i3I5nsdx8K/8Akd9N9rKX/wBAavZzXjXwqTPjawz2sZT/AOOtXs1LqLoUtXj82zVCqMDKgKu5RW+YcFhyB7jmuV8M6Yl9o8enT6fBIpCXtncOqsrXKySM1sx6lZIkYAHqVB710XiOW4h04GyRJLgyARq6hgW6jIPB6d64+3h1KdtIhsdQjsEuLUF5Hj3hXTzSrDglSF3jcMEAkZoewI7Ga68O6LrWhTaPdhIobm98zToEaWQRyqd0ZQDna4OCeqkYyAaxLbXrPS11G5sdBu4LJtQgmCHZGsUkls0bqQWztPm5B+gOK42z0+DRJhd6hfzQXMbMo8htxZgcfK3O4EZBHGPUV1Wk+G49cstPvI7eWe3nwY47y/kHyeY6BiAG53K3AOcc+tRZLcu5rR66xubiW+0a9jN1YxafNMsXnxRzQljGyshYkBiD64Sn+IZtB1HSJL14ku9Es42uppBtO5EHkWtor/eSQ7FdsYxvfNczfW0Xhu0spb7+0dLa98zEcV0Z/KIQD5x0+7KDgAn6VhadoN0NTT/hH9QTy5gxZ5DiMw9PnPR85xjBHNHKguW9e0r+yGitYyssljc2qs0ULopd4gTgoSzEjacj5uOg4rrfh9LbtZTRWzo3lKocL/Cx5IPv+vrXGF7q5tbi81GSOW4ub63zJuCIVAwpBwQFAzjg8LjFbnwcnWXT9RRUC+VIELD+M889B/jWnQg9DrnfGCZ0TXT6aZL/ADWuirB8W/8AIC1//sFy/wA1qJ7DjueD3pBlgz/zxj/9Bqu2Mnip74fvIP8ArhH/AOg1BitFsJktld3FjcpcWc0kM6fddDgir994h1S+tmt57nEDcukUaxh/97aBn8ay8U4CiyerC7GYppGKmxTSvtTEdv8ACo/8Vvp3H/LjL/6A1exV4/8ACtceNtO/68Jf/QGr2Co6ldDI8Uzm102OcRRzGOVWEUi7lfg8EdxXKC7S3ttHhWQW013p7wieTDiMiRyMjtksw45AIHrWjaeIZ9VvrWA29zEVk3g25AkJAOAueM/Wub8SwC6/si2SCSa8uIIRBIJRs2Ebdm08A7t3fjNMSE8UaXdvIs9lFJhomEluB84UsWPy9SMnqPQetdJok6HQ9Md/Dt/MscSsZLOVVVyAf3jRqwKvxKpPGRtYjI55a8/tbRLGCS4vLG5t7j/UFZhKx2EruUjBwCCM9OK6CW5u9rF10aaQqJFxdo7be4yynJ/xFQ9SkUfFskh8M2ulvpt+lz9vd7U3KpJKsG1SI9wYvkEjtgqF9MUzQ7K8tLPzLiRI7sytKZJRlIslWbcRxnCnj1b2NSa7rkllAUhi0/ZKQq+RcZIwAW3bQowdwx+PXBrkdT1W71BXSaREhZg3kxoETI6cDr+NNIDo5LgXemC7sbVp3m1VDFbBggOxDhR3AIOe/PH1v/BVgbDVl8sI4uTu5z+H4dKw7G4trTw/HcCOZbVLqNpFlCy75FDElU4424B5HXk0vw11t9M0q8MVuZfMuG6fQGr6EnsdYfinnRPEC/8AUKm/mtY//CZT/wDPg1Mk1iXVtP8AECvAYVXSJz9eVrOfwlR3PJL8fPBx/wAsI/5VWx0xV/UEybf/AK94z+lUwgJrRbEsbt5pwHPNLtGaXbTEJjsKaRzUuKQqe9AHb/C5f+Kz0/8A7B8v/oLV61XlPwvUf8Jlp/8A2Dpv/QXr1as1uyuhk3dhCklqYIHZjLgrE/lsRtbgNkY/OuH16a2ju/DYu4GktoLONpU3H51LEleoIHU9R1wMcV6LqljK9uqzWc8qlsiMHyy2FY/ePT1/CuN+x2GqeKNP0/VZkt4JNOCJPJJ5axyGMujE91zwRTbEi9Z3+jNpVvaahpN1N5EEUMUv2BmUo80kjBQckA+YoXnJ2cnnm5eaz4LEMj3WgPDDcON2NLVApQg7EORgkA5xjrzUWpWOgm5lis9bvzaHTBfRSNelzGQyLFEVyMsvznaCCOPSluPD+jXN7LZzaldz2sd9eJGDeiVQFEexyM5+ZnbLLyQOOhrPQ0IW1Dw0j3gutDuyC8r5FkYiInQRt6AHOwqcAK+exrP8R3/h3+yNTWz0e5trh0jhiM9ntEeFOULY4cMQc98DJPStS/sYW0e8ng1+6udST7QiwDUNySwJOEBDnk4U7guBu+8OmKb4k03S/wC1NWsLrU9Ums4Im1FJHvUlFyUfDr6b2BG1vrwRRdCOOsbiSHwzp7WdvNcTw6i22FHZTISmcDbzyMDjpg+tbHwnS0vdIvGFoImSUK4LZ3PtGW9s+lY+mTqmhxsgdBHfE5SdYyoKf89G4GBu5NdD8GbeS40O8e1inkAuGV8DcC3XIx2wR1rUg7D+z7T/AJ4rVHU7WGLTfEHlIFzpE/T/AIDW/wDYbz/n1n/79msvWraeHTNdeWKSNTpU4+ZSOflqKj91lQ3PC9RiAa2I728Z/Q1UVdrBgAcVo6kMm1/69o/61SIq1sSxkh3tkqq+wHFNCg/WpduFz703FUIZtpMc1IRSEUAdz8MR/wAVjpvH/MOm/wDQXr1GvMPhiCfGOlgZJOnzAAf7slepeRN/zxk/74NZL4mU9jpviFGn9iRCVYGUzdLgkJ9xupHP098V5ImqBYbaOaG+uVNukiiCOJxHtGw8OpOMqc9ueK9d+KdlNd+GBFAoZ/PU4yB2PrXjMyrGkUGqJNGsIwYZInweMZR1BwDxlTxkZzWcZxta+po4PexdMUVwEup7KYRxrHIIFtollEucMSBGRtIzgH0J5xU0sNmSqpBCZ9v7pmtoimQhGceWMgkZxzjn61zWnTWNtLIBd30LONvmPGZVA/3SlV7+7urNDDHqthcQOAoaMHdjGOcruU4Jz+fNWtSTpFe0t9NaWSzRmgbdMWtoQu4ckjMf3SSdoJ6YGKrTXdla4nnsZpIWXeQtjCfKB29flwpxu6+o985kV+TZzLqWtWoSbloYF8yQ8Y6hSFqK1fT5FnU3t26sm1RNM4Ue5wv9PwNMC3LfR3n2BbRpbeCSV/KBZImTbHs3ZVcAkk84J4rsf2bDs8PXax7ykksjuSMjeGUcH6H8ea88vry5j8iXTI1up7c/u8WpMS5GAqKRkgcnJ5JOfr2vwQa80Tw7qEN2Ps8kl15mxiMgFR19KTlH4b6hyy3toe4kn1rk/iF/yAdWbPI02cjv6VDLrrd7gfpWDr+qG8sNXhMgbOlXJxn0AqZx90IvU8N1IDda8YzbR8fnVErzWjqQ/wCPT/r2j/rVKtlsQxm3imstS000xERFJipSKbimB3vwlOzx7ojelnKf0evogaoo7H86+dvhcMeNdGJ/58Zv5SV7WJQfSoik2/67jk7JG/8AEG3efwtcGLl4mWT5Tzgdf514LqOoXsTMY5JvQYJxX0reWcd5bSW827y5F2tg4OPrXCaj8MIp2Y2mpmIHtLAH/UEV5sqUZu8juhVcFZHiRub2Xh7u4OeqljTNtwTwQwPrkfrXrH/Cor8Mdmv2uP8ArzwfzzTx8I78gbtbtGx62x/xpqko7D9q3ueURQXeQPMULjJBO7+dWP36AbZuSOAjcivVoPhTqMTZ/tbTyB/06t/8VVtPhtelt02o6eTjH/Hqx/8AZqyqU5dNTanVh1djyCW8ufLWNZpC24HgZ/P2q1pzyrE+cb3diwHHsP5V6m3wvMkpe41dwCekMOzHsOa1LL4e6RaIq7ZJdv8AefH6Cqp0VF87WpNXEOS5E7o8XukupBhELU7Tbe4iXVpJbd40Ok3aFiCATsBFe+2/h6wtf9TaQqfXbk1W8S6AdV0O6srZoopZo2jDOOAGUg9O+DW7k3pY5tD5jv8ATZ7vSdLuLSGSZxAUkCJzgMSpwOSMEjPtWA6MjFXVlYdQRgivaYvg3q8dqYhrSNkbMCVlAXuAMVJ/wqLxEdxOvbmPfzmJroVRIxcLniGKCPevbB8IvEWT/wATwj/toaQ/CTxGMn+3cf8AAzVe1QuQ8SP1H51LbWlxdti1gklP+wuQPqegr2U/CXxL210f99n/ABpr/CTxKQM64TjOBvPcYPej2qFyHNeCIBbfEDSYV6R6e69Mc+W+frznn8O1ep7uehxWH4T+Fes6T4gt9TutSiuWijePY7dmUr156Z6V3kfhicHLzxj/AHQTThJLqKSbOwozSKuMU/acciuQ3G8mgZGetO28dqTofSgBcn0oBzSFucY60m/5sHFOwXFJNNJz2NKTj1FLkEcUARtjpyKbtqX+lNOO1MCEx4HH60bTng08nkGjJJHegQgyD1o3diKRyd1Jux1FMQ7cSOmKYSe1KxB7YoUc80wFXPelJ96B/KkyfY0xH//Z",
   "brand": "Jack Daniel's",
   "rank": 20,
-  "rankEstimated": true
+  "rankEstimated": true,
+  "country": "버번 위스키",
+  "state": "테네시"
  }
 ];
 
@@ -1909,10 +1920,16 @@ document.getElementById("summary").addEventListener("click", e => {
   sum.classList.remove("flash-cat"); void sum.offsetWidth; sum.classList.add("flash-cat");
 });
 
-// 화면 구조: 꼬냑 / 위스키(블렌디드·싱글몰트 > 원산지 > 브랜드) / 와인 / 기타 증류주
-// 위스키 병은 region 값(아래 REGIONS 중 하나)으로 원산지 칸이 정해집니다. 비어 있는 원산지 칸은 숨깁니다.
-const REGIONS = {"블렌디드 위스키": ["일본 위스키", "스카치 위스키", "잉글랜드 위스키", "한국 위스키", "독립병입자"],
-                 "싱글몰트 위스키": ["일본 위스키", "스카치 위스키", "잉글랜드 위스키", "한국 위스키", "독립병입자"]};
+// 화면 구조: 꼬냑 / 위스키(나라 > 블렌디드·싱글몰트, 버번은 테네시·켄터키 > 브랜드) / 와인 / 기타 증류주
+// 위스키 병의 칸은 country(아래 WHISKY 중 하나)와 category(블렌디드/싱글몰트) 또는 state(테네시/켄터키)로 정해집니다.
+// 독립병입자 병은 indie: true 로 표시하면 같은 칸 안의 '독립병입자' 묶음에 들어갑니다. 병이 없는 칸은 숨깁니다.
+const TYPE_SUBS = [["블렌디드 위스키", b => b.category === "블렌디드 위스키"], ["싱글몰트 위스키", b => b.category === "싱글몰트 위스키"]];
+const WHISKY = [
+  ["스카치 위스키", TYPE_SUBS],
+  ["재패니즈 위스키", TYPE_SUBS],
+  ["버번 위스키", [["테네시 위스키", b => b.state === "테네시"], ["켄터키 위스키", b => b.state === "켄터키"]]],
+  ["한국 위스키", TYPE_SUBS],
+];
 function brandBlocks(list){
   const groups = {};
   list.forEach(b => (groups[b.brand] = groups[b.brand] || []).push(b));
@@ -1927,15 +1944,16 @@ app.innerHTML = TOP.map(([top, cats]) => {
   const list = BOTTLES.filter(b => cats.includes(b.category));
   let body;
   if (top === "위스키") {
-    body = cats.map(cat => {
-      const sub = list.filter(b => b.category === cat);
-      if (!REGIONS[cat]) return `<details class="subcat" open><summary>${cat}<small>${sub.length}병</small></summary>${brandBlocks(sub) || EMPTY}</details>`;
-      const regions = REGIONS[cat].map(rg => {
-        const rl = sub.filter(b => (b.region || "스카치 위스키") === rg);
-        return rl.length ? `<details class="region" open><summary>${rg}<small>${rl.length}병</small></summary>${brandBlocks(rl)}</details>` : "";
+    body = WHISKY.map(([country, subs]) => {
+      const cl = list.filter(b => (b.country || "스카치 위스키") === country);
+      if (!cl.length) return "";
+      const inner = subs.map(([name, test]) => {
+        const sl = cl.filter(test); if (!sl.length) return "";
+        const own = sl.filter(b => !b.indie), ind = sl.filter(b => b.indie);
+        return `<details class="region" open><summary>${name}<small>${sl.length}병</small></summary>${brandBlocks(own)}${ind.length ? `<details class="indie" open><summary>독립병입자<small>${ind.length}병</small></summary>${brandBlocks(ind)}</details>` : ""}</details>`;
       }).join("");
-      return `<details class="subcat" open><summary>${cat}<small>${sub.length}병</small></summary>${regions || EMPTY}</details>`;
-    }).join("");
+      return `<details class="subcat" open><summary>${country}<small>${cl.length}병</small></summary>${inner}</details>`;
+    }).join("") || EMPTY;
   } else body = brandBlocks(list) || EMPTY;
   return `<details class="cat" id="cat-${top}" open><summary>${top}<small>${list.length}병</small></summary>${body}</details>`;
 }).join("");
@@ -1952,7 +1970,7 @@ const SYNONYMS = [
  ["글렌피딕","glenfiddich"],["글렌고인","glengoyne"],["글렌리벳","glenlivet"],["글렌모렌지","glenmorangie"],["글렌터렛","glenturret"],
  ["맥캘란","맥켈란","맥칼란","macallan"],["마르스","쓰누키","츠누키","mars","tsunuki"],["시그너토리","signatory"],["스프링뱅크","springbank"],
  ["케이머스","caymus"],["트라피체","trapiche"],["이스카이","iscay"],["탈보","탈보트","talbot"],["기원","ki one","kione"],["화요","hwayo"],
- ["타케츠루","다케츠루","taketsuru"],["산토리","suntory","サントリー"],["야마자키","山崎","yamazaki"],["캐든헤드","카덴헤드","케이든헤드","cadenhead"],["미니어처","미니","miniature","50ml"],["독립병입자","독립 병입자","independent bottler","independent"],["잉글랜드","england","english"],["잭다니엘","잭 다니엘","잭다니엘스","jack daniel"],["테네시","tennessee"],["아메리칸","american","미국 위스키"],["올드 넘버7","no.7","old no"],["킹스랜드","kingsland"],["슈퍼닛카","슈퍼 닛카","super nikka"],
+ ["타케츠루","다케츠루","taketsuru"],["산토리","suntory","サントリー"],["야마자키","山崎","yamazaki"],["캐든헤드","카덴헤드","케이든헤드","cadenhead"],["미니어처","미니","miniature","50ml"],["독립병입자","독립 병입자","independent bottler","independent"],["잉글랜드","england","english"],["잭다니엘","잭 다니엘","잭다니엘스","jack daniel"],["테네시","tennessee"],["켄터키","kentucky"],["아메리칸","american","미국 위스키"],["올드 넘버7","no.7","old no"],["킹스랜드","kingsland"],["슈퍼닛카","슈퍼 닛카","super nikka"],
  ["블루","blue"],["골드","gold"],["블랙","black"],["레드","red"],["그린","green"],["스윙","swing"],["엑셀시오르","엑셀시어","excelsior"],
  ["킹조지","킹 조지","king george"],["조지 4세","조지4세","george iv","king george iv"],["파라디","paradis"],["코르동블루","꼬르동블루","코르동 블루","꼬르동 블루","cordon bleu"],
  ["나폴레옹","napoleon"],["엑스트라","extra"],["xo","x.o","엑스오"],["xxo"],["vsop"],["오스쿠로","oscuro"],["클래식컷","클래식 컷","classic cut"],
@@ -1970,7 +1988,7 @@ const PARTICLES = ["으로","에서","이랑","하고","까지","부터","은","
 const norm = s => String(s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").normalize("NFC");
 const ORIGIN = {"Jack Daniel's":"미국 usa 테네시","Nikka":"일본 japan","Suntory":"일본 japan","Mars":"일본 japan","Ki One":"한국 korea","Hwayo":"한국 korea","Trapiche":"아르헨티나 argentina","Caymus":"미국 usa","Château Talbot":"프랑스 france 보르도"};
 const originOf = b => ORIGIN[b.brand] || (b.category === "꼬냑" ? "프랑스 france" : b.category.includes("위스키") && b.brand !== "Sansibar" ? "스코틀랜드 scotland" : "");
-const SEARCH_TEXT = BOTTLES.map(b => norm([b.name,b.brand,b.category,CAT_WORDS[b.category]||"",originOf(b),b.region||"",b.age,b.era,b.notes,b.story||""].join(" ")));
+const SEARCH_TEXT = BOTTLES.map(b => norm([b.name,b.brand,b.category,CAT_WORDS[b.category]||"",originOf(b),b.country||"",b.indie?"독립병입자 independent bottler":"",b.state?b.state+" 위스키":"",b.age,b.era,b.notes,b.story||""].join(" ")));
 const ageNum = b => { const m = String(b.age).match(/(\d+)\s*(~\s*\d+\s*)?년/); return m ? +m[1] : null; };
 
 function expand(tok){
